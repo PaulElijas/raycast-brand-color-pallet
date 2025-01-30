@@ -51,5 +51,5 @@ export interface ColorSectionProps {
 export interface ColorFormProps {
   color?: ColorPaletteItem;
   onSave?: () => void;
-  initialColorType?: ColorType;
+  currentView: PalletType;
 }

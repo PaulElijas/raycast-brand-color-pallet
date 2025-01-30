@@ -20,7 +20,7 @@ export function ViewSelector({ selectedView, onViewChange, onSave }: ViewSelecto
             <Action.Push
               icon={Icon.Plus}
               title="Add Color"
-              target={<ColorForm onSave={onSave} initialColorType="primitive" />}
+              target={<ColorForm onSave={onSave} currentView={selectedView} />}
               shortcut={{ modifiers: ["cmd"], key: "n" }}
             />
           </ActionPanel>
@@ -41,7 +41,7 @@ export function ViewSelector({ selectedView, onViewChange, onSave }: ViewSelecto
             <Action.Push
               icon={Icon.Plus}
               title="Add Color"
-              target={<ColorForm onSave={onSave} initialColorType="token" />}
+              target={<ColorForm onSave={onSave} currentView={selectedView} />}
               shortcut={{ modifiers: ["cmd"], key: "n" }}
             />
           </ActionPanel>

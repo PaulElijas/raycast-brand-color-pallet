@@ -4,10 +4,12 @@ import { addColor, updateColor, getColors } from "../utils/storage";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export function ColorForm({ color, onSave, initialColorType }: ColorFormProps) {
+export function ColorForm({ color, onSave, currentView }: ColorFormProps) {
   const { pop } = useNavigation();
   const isEditing = !!color;
-  const [colorType, setColorType] = useState<ColorType>(color?.type || initialColorType || "primitive");
+  const [colorType, setColorType] = useState<ColorType>(
+    color?.type || (currentView === "primitives" ? "primitive" : "token"),
+  );
   const [primitives, setPrimitives] = useState<PrimitiveColor[]>([]);
 
   useEffect(() => {
@@ -122,6 +124,7 @@ export function ColorForm({ color, onSave, initialColorType }: ColorFormProps) {
       <Form.TextField
         id="name"
         title="Name"
+        autoFocus
         placeholder={
           colorType === "primitive"
             ? `e.g. Base/White, Brand/Primary, Gray-100`

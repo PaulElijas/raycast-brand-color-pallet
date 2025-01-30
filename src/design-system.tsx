@@ -27,7 +27,7 @@ export default function Command() {
     loadColors();
   }, []);
 
-  const filteredColors: ColorPaletteItem[] = selectedView === "primitives" ? getPrimitives(colors) : getTokens(colors);
+  const filteredColors = selectedView === "primitives" ? getPrimitives(colors) : getTokens(colors);
   const groupedColors: Map<string, ColorPaletteItem[]> = groupColorsByCategory(filteredColors);
 
   return (

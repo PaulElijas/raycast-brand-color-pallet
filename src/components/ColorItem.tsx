@@ -13,6 +13,8 @@ export function ColorItem({ color, onUpdate, tokenMode }: ColorItemProps) {
   });
 
   const colorValue = color.type === "primitive" ? color.value : color.values[tokenMode];
+  const category = color.name.includes("/") ? color.name.split("/")[0] : "Unsorted";
+  const name = color.name.includes("/") ? color.name.split("/")[1] : color.name;
 
   useEffect(() => {
     async function getFrontmostApp() {
@@ -57,8 +59,17 @@ export function ColorItem({ color, onUpdate, tokenMode }: ColorItemProps) {
           adjustContrast: false,
         },
       }}
-      title={color.name.includes("/") ? color.name.split("/")[1] : color.name}
+      title={name}
       subtitle={colorValue}
+      keywords={[
+        colorValue.toUpperCase(),
+        colorValue.toLowerCase(),
+        name,
+        category,
+        color.type,
+        `${color.type}s`,
+        ...(color.type === "token" ? [tokenMode] : []),
+      ]}
       actions={
         <ActionPanel>
           <ActionPanel.Section>
@@ -71,7 +82,13 @@ export function ColorItem({ color, onUpdate, tokenMode }: ColorItemProps) {
             <Action.Push
               icon={Icon.Pencil}
               title="Edit Color"
-              target={<ColorForm color={color} onSave={onUpdate} />}
+              target={
+                <ColorForm
+                  color={color}
+                  onSave={onUpdate}
+                  currentView={color.type === "primitive" ? "primitives" : "tokens"}
+                />
+              }
               shortcut={{ modifiers: ["cmd"], key: "e" }}
             />
           </ActionPanel.Section>
@@ -79,7 +96,9 @@ export function ColorItem({ color, onUpdate, tokenMode }: ColorItemProps) {
             <Action.Push
               icon={Icon.Plus}
               title="Add Color"
-              target={<ColorForm onSave={onUpdate} />}
+              target={
+                <ColorForm onSave={onUpdate} currentView={color.type === "primitive" ? "primitives" : "tokens"} />
+              }
               shortcut={{ modifiers: ["cmd"], key: "n" }}
             />
             <Action icon={Icon.Trash} title="Delete Color" style={Action.Style.Destructive} onAction={handleDelete} />
