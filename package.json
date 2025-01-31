@@ -3,7 +3,7 @@
   "name": "brand-color-palette",
   "title": "Brand Color Palette",
   "description": "Access and manage your brand's color palette from Raycast",
-  "icon": "extension-icon.png",
+  "icon": "color-palette-icon.png",
   "author": "PaulElijas",
   "categories": [
     "Design Tools",
@@ -15,6 +15,7 @@
     {
       "name": "open-brand-color-palette",
       "title": "Open Brand Color Palette",
+      "subtitle": "",
       "description": "Access and manage your brand's color system",
       "mode": "view"
     }
